@@ -57,7 +57,7 @@ After logging in:
 2. Delete the `argocd-initial-admin-secret` for security
 3. Set up your applications using the ArgoCD UI or CLI
 4. Connect your repository in settings in the ArgoCD UI
-5. [Create application in the ArgoCD UI](../calendar_argo_project)
+5. [Create application in the ArgoCD UI](../calendar-argo)
 
 
 ## Documentation

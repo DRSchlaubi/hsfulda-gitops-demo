@@ -10,4 +10,4 @@
 - Auto create namespace: On
 - Source:
     - Url: https://github.com/DRSchlaubi/hsfulda-gitops-demo.git
-    - Path: `calendar_argo_project`
+    - Path: `calendar-argo`

@@ -12,7 +12,7 @@
 4. Run the following command
 
 ```bash
-flux bootstrap github --token-auth --owner=<your github user> --repository=<your repo> --branch=main --path=calendar_flux_project --personal
+flux bootstrap github --token-auth --owner=<your github user> --repository=<your repo> --branch=main --path=calendar-flux --personal
 ```
 
 ## Dashboard
