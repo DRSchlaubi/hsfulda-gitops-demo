@@ -9,6 +9,12 @@ spec:
     repoURL: oci://ghcr.io/drschlaubi/hsfulda-argocd-demo/calendar-app-chart
     targetRevision: 1.0.7
     path: .
+    helm:
+      values: |
+        mariadb:
+          podSecurityContext:
+            appArmorProfile:
+              type: Unconfined
   destination:
     server: https://kubernetes.default.svc
     namespace: calendar-app
