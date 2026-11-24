@@ -1,0 +1,33 @@
+name: repo_created.yaml
+on:
+  push:
+jobs:
+  update_image_paths:
+    if: github.repository != 'DRSchlaubi/hsfulda-gitops-demo'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - name: Delete Initialization Workflow
+        working-directory: .github/workflows
+        run: rm init.yaml
+      - name: Update Helm Chart template
+        working-directory: calendar-chart
+        run:  yq -i '.image.repository = "ghcr.io/${{ github.repository }}/calendar-app"' values.yaml
+      - name: Update ArgoCD project
+        working-directory: calendar-argo
+        run:  yq -i '.spec.source.repoURL = "oci://ghcr.io/${{ github.repository }}/calendar-app-chart"' calendar-app.yaml
+      - name: Update Flux project
+        working-directory: calendar-flux/calendar-app
+        run:  yq -i '. | select(.kind == "OCIRepository" and .metadata.name == "calendar-app").spec.url = "oci://ghcr.io/${{ github.repository }}/calendar-app-chart"' calendar-app.yaml
+      - name: Update template status
+        run: |
+          sed -i 's/Template status: unready/Template status: ready/g; s/Template%20status-unready-red/Template%20status-ready-brightgreen/g' README.md
+      - name: Commit initialized files
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "chore: initialize repository from template"
+          git push

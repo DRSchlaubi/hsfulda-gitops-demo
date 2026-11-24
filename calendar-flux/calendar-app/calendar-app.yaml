@@ -4,7 +4,7 @@ metadata:
   name: calendar-app
 spec:
   interval: 24h
-  url: oci://ghcr.io/drschlaubi/hsfulda-argocd-demo/calendar-app-chart
+  url: oci://ghcr.io/${{ github.repository }}/calendar-app-chart
   ref:
     semver: "1.x"
 ---
