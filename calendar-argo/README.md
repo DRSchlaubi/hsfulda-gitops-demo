@@ -2,7 +2,7 @@
 
 ## Installation
 
-1.[Create a new Repository using this template (optional)](https://github.com/DRSchlaubi/hsfulda-argocd-demo/generate)
+1. [Create a new Repository using this template (optional)](https://github.com/DRSchlaubi/hsfulda-argocd-demo/generate)
 2. Create a new ArgoCD Application
 - Application Name: `argocd-demo`
 - Project name: `default`
