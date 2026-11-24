@@ -19,7 +19,7 @@ Assert-LastExitCode "Failed to create namespace '$ArgoCdNamespace'"
 # Add ArgoCD Helm repo if not already added
 helm repo add argo https://argoproj.github.io/argo-helm
 Assert-LastExitCode "Failed to add Helm repo"
-helm repo update
+helm repo update argo
 Assert-LastExitCode "Failed to update Helm repos"
 
 # Install ArgoCD with LoadBalancer service type

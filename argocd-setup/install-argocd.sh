@@ -7,7 +7,7 @@ kubectl create namespace $ARGOCD_NAMESPACE --dry-run=client -o yaml | kubectl ap
 
 # Add ArgoCD Helm repo if not already added
 helm repo add argo https://argoproj.github.io/argo-helm
-helm repo update
+helm repo update argo
 
 # Install ArgoCD with LoadBalancer service type
 helm install argocd argo/argo-cd \
