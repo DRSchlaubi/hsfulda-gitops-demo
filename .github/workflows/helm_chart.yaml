@@ -5,7 +5,7 @@ on:
       - main
     paths:
       - calendar-chart
-      - .github/workflows/helm_chart.yaml.yml
+      - helm_chart.yaml
 jobs:
   push:
     runs-on: ubuntu-latest
@@ -24,6 +24,7 @@ jobs:
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.9.0
         with:
+          charts_dir: calendar-chart
           oci_registry_url: oci://ghcr.io/${{ github.repository }}
         env:
           CR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
