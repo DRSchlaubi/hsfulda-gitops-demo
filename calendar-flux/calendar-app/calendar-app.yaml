@@ -26,3 +26,8 @@ spec:
   chartRef:
     kind: OCIRepository
     name: calendar-app
+  values: |
+    mariadb:
+      podSecurityContext:
+        appArmorProfile:
+          type: Unconfined
