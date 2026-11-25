@@ -7,11 +7,11 @@ This project consists of a calendar application with event management functional
 
 ## Project Structure
 
-- **calendar-app/** - Contains the monolithic calendar application code
-- **calendar-chart/** - Contains the Helm chart for deploying the application to Kubernetes
-- **calendar-argo_project/** - The ArgoCD application files needed to install this
-- **calendar-flux_project/** - The FluxCD configuration files needed to install this (Advanced users only)
-- **docker-compose.yml** - Docker Compose file for running the application locally
+- **[calendar-app/](calendar-app/)** - Contains the monolithic calendar application code
+- **[calendar-chart/](calendar-chart/)** - Contains the Helm chart for deploying the application to Kubernetes
+- **[calendar-argo/](calendar-argo/)** - The ArgoCD application files needed to install this
+- **[calendar-flux/](calendar-flux/)** - The FluxCD configuration files needed to install this (Advanced users only)
+- **[docker-compose.yml](docker-compose.yaml)** - Docker Compose file for running the application locally
 
 ## Calendar App
 
@@ -27,7 +27,7 @@ A simple calendar application with event management functionality, built as a mo
 ### Tech Stack
 
 - **Backend**: Node.js, Express.js
-- **Database**: MySQL
+- **Database**: MariaDB
 - **Frontend**: HTML, CSS, JavaScript, Axios
 
 ### Running with Docker Compose
@@ -36,7 +36,7 @@ To run the application using Docker Compose:
 
 1. From the root directory, run:
    ```
-   docker-compose up
+   docker compose up
    ```
 
 2. Access the application at `http://localhost:3000`
@@ -49,33 +49,11 @@ For more information on deploying with Helm, see the [Helm Chart README](calenda
 
 ## ArgoCD Setup
 
-The project includes an ArgoCD setup for continuous deployment to Kubernetes. The setup files are located in the `argocd-setup` directory.
+The project includes an ArgoCD setup for continuous deployment to Kubernetes. The setup files are located in the [`argocd-setup`](argocd-setup) directory.
 
-### Installing ArgoCD
+## FluxCD Setup (Advanced users only)
 
-To install ArgoCD on your Kubernetes cluster:
-
-1. Navigate to the argocd-setup directory:
-   ```
-   cd argocd-setup
-   ```
-
-2. Make the installation script executable:
-   ```
-   chmod +x install-argocd.sh
-   ```
-
-3. Run the installation script (optionally specify a namespace):
-   ```
-   ./install-argocd.sh [namespace]
-   ```
-
-The script will:
-- Create the specified namespace (or use the default)
-- Install ArgoCD using Helm with LoadBalancer service type
-- Display the service details and initial admin password
-
-For more details, see the [ArgoCD Setup README](argocd-setup/README.md).
+The project includes an FluxCD setup for continuous deployment to Kubernetes. The setup files are located in the [`calendar-flux`](calendar-flux) directory.
 
 ## GitHub Actions CI/CD
 
@@ -84,19 +62,10 @@ The project includes a GitHub Actions workflow for continuous integration and de
 ### CI/CD Pipeline Features
 
 - Automatically builds the Docker image when triggered
-- Pushes the image to DockerHub with both `latest` and commit SHA tags
+- Pushes the image to ghcr.io with both `latest` and commit SHA tags
+- Pushes the helm chart to ghcr.io with using the GitHub run number as a version
 - Can be manually triggered using GitHub's workflow_dispatch feature
 - Uses Docker Buildx for efficient builds
-
-To use this workflow:
-
-1. Set up the following secrets in your GitHub repository:
-   - `DOCKERHUB_USERNAME`: Your DockerHub username
-   - `DOCKERHUB_TOKEN`: Your DockerHub access token
-
-2. Uncomment the push/pull request triggers in the workflow file to enable automatic builds
-
-The Docker images are published to: `faizananwar532/hsfulda-argocd-demo`
 
 ## License
 
