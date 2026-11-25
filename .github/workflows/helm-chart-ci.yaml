@@ -12,6 +12,7 @@ permissions:
   packages: write
 jobs:
   push:
+    name: Push Helm Chart
     runs-on: ubuntu-latest
     if: github.event.head_commit.message != 'Initial Commit'
     steps:
