@@ -57,7 +57,7 @@ The project includes an FluxCD setup for continuous deployment to Kubernetes. Th
 
 ## GitHub Actions CI/CD
 
-The project includes a GitHub Actions workflow for continuous integration and deployment. The workflow file is located at `.github/workflows/docker-ci.yml`.
+The project includes a GitHub Actions workflow for continuous integration and deployment. The workflow file is located at `.github/workflows/docker-ci.yaml`.
 
 ### CI/CD Pipeline Features
 

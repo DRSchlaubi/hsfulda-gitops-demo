@@ -26,6 +26,7 @@ jobs:
   build-and-push:
     name: Build & Push
     runs-on: ubuntu-latest
+    if: github.event.head_commit.message != 'Initial Commit'
     steps:
       # Step 1: Check out the repository code
       - name: Checkout code
