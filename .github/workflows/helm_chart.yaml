@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      - name: Set lowercased repository name
+        run: |
+          REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          echo "REPO_LOWER=$REPO_LOWER" >> "$GITHUB_ENV"
       - name: Set chart version
         working-directory: calendar-chart
         run: |
@@ -25,5 +29,5 @@ jobs:
         uses: helm/chart-releaser-action@main
         with:
           charts_dir: .
-          oci_registry_url: oci://ghcr.io/${{ github.repository }}
+          oci_registry_url: oci://ghcr.io/${{ env.REPO_LOWER }}
           skip_release: true
