@@ -6,6 +6,9 @@ on:
     paths:
       - calendar-chart/**
       - .github/workflows/helm_chart.yaml
+permissions:
+  contents: read
+  packages: write
 jobs:
   push:
     runs-on: ubuntu-latest
