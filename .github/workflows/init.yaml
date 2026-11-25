@@ -22,12 +22,15 @@ jobs:
         run:  yq -i '.image.repository = "ghcr.io/${{ env.REPO_LOWER }}/calendar-app"' values.yaml
       - name: Update ArgoCD project
         working-directory: calendar-argo
-        run:  yq -i '.spec.source.repoURL = "oci://ghcr.io/${{ env.REPO_LOWER }}/calendar-app-chart"' calendar-app.yaml
+        run: |
+          yq -i '.spec.source.repoURL = "oci://ghcr.io/${{ env.REPO_LOWER }}/calendar-app-chart"' calendar-app.yaml
+          sed -i "s|--repo <your repo>|--repo https://github.com/${{ github.repository }}.git|g" README.md
       - name: Update Flux project
         working-directory: calendar-flux/calendar-app
         run:  |
           yq -i '. | select(.kind == "OCIRepository" and .metadata.name == "calendar-app").spec.url = "oci://ghcr.io/${{ env.REPO_LOWER }}/calendar-app-chart"' calendar-app.yaml
           yq -i '. | select(.kind == "ImageRepository" and .metadata.name == "calendar-app").spec.image = "ghcr.io/${{ env.REPO_LOWER }}/calendar-app"' image-update-automation.yaml
+          sed -i "s/<your github user>/${{ github.repository_owner }}/g; s/<your repo>/${{ github.event.repository.name }}/g" README.md
       - name: Update template status
         run: |
           sed -i 's/Template status: unready/Template status: ready/g; s/Template%20status-unready-red/Template%20status-ready-brightgreen/g' README.md
