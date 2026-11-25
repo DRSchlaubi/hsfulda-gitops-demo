@@ -13,8 +13,23 @@
 5. Run the following command
 
 ```bash
-flux bootstrap github --token-auth --owner=<your github user> --repository=<your repo> --branch=main --path=calendar-flux --personal
+flux bootstrap github --token-auth --owner=<your github user> --repository=<your repo> --branch=main --path=calendar-flux --personal --components-extra=image-reflector-controller,image-automation-controller
 ```
+
+## Image Update Automation
+FluxCD has built-in-support for updating your OCI image references, an example configuration can be found 
+[here](calendar-app/image-update-automation.yaml) in order to test it trigger a new CI run, by creating a new Docker
+build:
+```
+touch calendar-app/.ci-trigger
+git add .
+git commit -m "Trigger Docker CI"
+git push origin main
+```
+
+> [!TIP]
+> Since you do not have a public IP FluxCD cannot use [WebHooks](https://fluxcd.io/flux/guides/webhook-receivers/) to instantly register the new OCI image tag
+> therefore you can use the following command to speed things up: `flux reconcile image repository calendar-app -n calendar-app`
 
 ## Dashboard
 
