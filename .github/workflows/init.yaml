@@ -26,10 +26,10 @@ jobs:
           yq -i '.spec.source.repoURL = "oci://ghcr.io/${{ env.REPO_LOWER }}/calendar-app-chart"' calendar-app.yaml
           sed -i "s|--repo <your repo>|--repo https://github.com/${{ github.repository }}.git|g" README.md
       - name: Update Flux project
-        working-directory: calendar-flux/calendar-app
+        working-directory: calendar-flux
         run:  |
-          yq -i '. | select(.kind == "OCIRepository" and .metadata.name == "calendar-app").spec.url = "oci://ghcr.io/${{ env.REPO_LOWER }}/calendar-app-chart"' calendar-app.yaml
-          yq -i '. | select(.kind == "ImageRepository" and .metadata.name == "calendar-app").spec.image = "ghcr.io/${{ env.REPO_LOWER }}/calendar-app"' image-update-automation.yaml
+          yq -i '. | select(.kind == "OCIRepository" and .metadata.name == "calendar-app").spec.url = "oci://ghcr.io/${{ env.REPO_LOWER }}/calendar-app-chart"' calendar-app/calendar-app.yaml
+          yq -i '. | select(.kind == "ImageRepository" and .metadata.name == "calendar-app").spec.image = "ghcr.io/${{ env.REPO_LOWER }}/calendar-app"' calendar-app/image-update-automation.yaml
           sed -i "s/<your github user>/${{ github.repository_owner }}/g; s/<your repo>/${{ github.event.repository.name }}/g" README.md
       - name: Update template status
         run: |
