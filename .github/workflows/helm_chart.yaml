@@ -26,5 +26,4 @@ jobs:
         with:
           charts_dir: .
           oci_registry_url: oci://ghcr.io/${{ github.repository }}
-        env:
-          CR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          skip_release: true
