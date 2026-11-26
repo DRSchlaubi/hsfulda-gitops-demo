@@ -5,8 +5,8 @@
 - [GitHub Account](https://github.com/signup)
 
 ## Installation
-1. [Wait for the template to be initialized](../README.md#template-status)
-2. Setup an Kubernetes cluster (e.g. with [RKE2](https://github.com/srieger1/terraform-openstack-rke2/tree/hsfulda-example/examples/hs-fulda))
+1. Setup an Kubernetes cluster (e.g. with [Talos](https://github.com/DRSchlaubi/opentofu-openstack-talos/tree/main/examples/hs-fulda))
+2. [Wait for the template to be initialized](../README.md#template-status)
 3. [Create a new Repository using this template](https://github.com/DRSchlaubi/hsfulda-argocd-demo/generate)
 4. Create a [GitHub PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) 
    according to the [FluxCD docs](https://fluxcd.io/flux/installation/bootstrap/github/#github-pat) with access to the just created repository
